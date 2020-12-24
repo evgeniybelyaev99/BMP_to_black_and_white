@@ -11,18 +11,17 @@ using System.Collections.Specialized;
 
 namespace G6 {
     class Program {
-        
 
         static string read() { return Console.ReadLine().Trim(); }
 
         static void Main(string[] args) {
-            
+            // Путь к исходному файлу   
             string fileSrc = Environment.CurrentDirectory + "\\";
             if (args.Length >= 1) {
                 fileSrc += args[0];
             }
 
-            
+            // Путь к выходному файлу
             string fileRes = Environment.CurrentDirectory + "\\";
             if (args.Length >= 2) {
                 fileRes += args[1];
@@ -31,16 +30,17 @@ namespace G6 {
             
             Bitmap bmp;
 
-            
+            // Чтение исход.изображения
             while (true) {
-                
+                // Проверяем расширение файла .bmp
                 string[] fileSplit = fileSrc.Split('.');
                 if (fileSrc.Contains(".") && fileSplit[fileSplit.Length - 1] == "bmp") {
-                    
-                    try {
+                    // Пытаемся прочитать из входного файла
+                    try
+                    {
                         bmp = new Bitmap((Bitmap)Image.FromFile(fileSrc));
                         Console.WriteLine("Входной файл успешно прочтён!");
-                        
+                        // Если удалось, выходим из бесконечного цикла
                         break;
                     }
                     
@@ -52,7 +52,7 @@ namespace G6 {
                     Console.WriteLine("Исходный файл должен иметь расширение bmp!");
                 }
 
-                
+                // Предлагаем повторить ввод или выйти из программы
                 Console.WriteLine("Изменить имя файла? - Y");
                 Console.WriteLine("Выход из программы? - Q");
                 string rd = read();
@@ -65,7 +65,7 @@ namespace G6 {
                 }
             }
 
-            
+            // Обработка изображения
             int WHd = (bmp.Width * bmp.Height) / 10;
             int progress = 10;
             for (int x = 0; x < bmp.Width; x++) {
@@ -81,17 +81,18 @@ namespace G6 {
                 }
             }
 
-            
+            // Сохранение изображения
             Console.WriteLine("Сохранение...");
             while (true) {
-                
+                // Проверяем расширение файла .bmp
                 string[] fileSplit = fileRes.Split('.');
                 if (fileRes.Contains(".") && fileSplit[fileSplit.Length - 1] == "bmp") {
-                    
-                    try {
+                    // Пытаемся сохранить
+                    try
+                    {
                         bmp.Save(fileRes);
                         Console.WriteLine("Обработка успешно завершена!");
-                        
+                        // Выходим, если успешно сохранили файл
                         break;
                     }
                     
@@ -103,7 +104,7 @@ namespace G6 {
                     Console.WriteLine("Файл-результат должен иметь расширение bmp!");
                 }
 
-                
+                // Предлагаем повторить ввод или выйти из программы
                 Console.WriteLine("Изменить имя файла? - Y");
                 Console.WriteLine("Выход из программы? - Q");
                 string rd = read();
